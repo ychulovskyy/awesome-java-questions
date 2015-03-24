@@ -94,7 +94,19 @@
 </ol>
 
 <h2>
-<a id="garbage-collectors" class="anchor" href="#garbage-collectors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Garbage Collectors</h2>
+<a id="memory--garbage-collectors" class="anchor" href="#memory--garbage-collectors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Memory &amp; Garbage Collectors</h2>
+
+<ol>
+<li>What Java memory model specifies?</li>
+<li>How GB works?</li>
+<li>Mention heap parts</li>
+<li>How to monitor Java memory usage?</li>
+<li>Mention differences between GC implementations: Serial, Parallel, ParallelOld, ConcarentMarkAndSweep</li>
+<li>Mention differences between G1 and C4 GCs</li>
+<li>How to find memory leaks in Java?</li>
+<li>Disadvantages of setting heap size too high</li>
+<li>Mention differences between Perm Space vs Metadata space in Java 8</li>
+</ol>
 
 <h2>
 <a id="exceptions" class="anchor" href="#exceptions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exceptions</h2>
@@ -103,20 +115,106 @@
 <li>What are the two types of Exceptions in Java ? Which are the differences between them ?</li>
 <li>What is the difference between Exception and Error in java ?</li>
 <li>What is exception propagation?</li>
+<li>try-with-resources statement and AutoClosable </li>
+<li>Assume there are a lot of return statements in one method. How to do something (e.g. increment variable value) before return from the method? </li>
+<li>What "Chained Exceptions" means?</li>
+<li>Draw exception hierarchy for the classes: RuntimeException, Error, Exception, Throwable, IOException</li>
+<li>Mention all Exception methods</li>
+<li>Catching multiple exception: catch(SQLException | IOException e) { ...}. What will be the type of exception inside the catch block?</li>
+<li>Where it's better to log exception? At place where it occurs? Logging somewhere in the middle of the call stack, where sufficient information is available (the context of the component call)? Or logging centrally at the top of the call stack?</li>
+<li>NoClassDefFoundError vs ClassNotFoundException</li>
+<li>What is bad in the following code examples?<br>
+catch (NoSuchMethodException e) {
+return false;
+}</li>
 </ol>
 
+<p>public void foo() throws Exception {
+}</p>
+
+<p>try {
+   someMethod();<br>
+} catch (Throwable e) {<br>
+   LOGGER.error("method has failed", e);<br>
+}</p>
+
+<p>catch (NoSuchMethodException e) {<br>
+   LOGGER.error("Some information", e);<br>
+   throw e;<br>
+}</p>
+
+<p>try {<br>
+  someMethod();  //May throw DAOException<br>
+} finally {<br>
+  cleanUp();    //May throw DAOException<br>
+}</p>
+
+<p>catch (NoSuchMethodException e) {<br>
+   throw e;<br>
+}</p>
+
+<p>catch (NoSuchMethodException e) {<br>
+   e.printStackTrace();<br>
+}<br></p>
+
+<p>Connection conn = null;<br>
+try{<br>
+    conn = getConnection();<br>
+    ...<br>
+} finally {<br>
+    try {<br>
+        conn.close();<br>
+    } catch (Exception e) {<br>
+        logger.error(e);<br>
+    }<br>
+}</p>
+
 <h2>
-<a id="java-5" class="anchor" href="#java-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>Java 5+</h2>
+<a id="java-5" class="anchor" href="#java-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>Java 5</h2>
 
 <ol>
 <li>Generics benefits</li>
 <li>Generics: Producer extends and Consumer super principle</li>
+<li>Is Generic type accessible during runtime?</li>
 <li>Benefits of Enum over final public fields in a class</li>
-<li>Describe all methods of iteration over elements in a List (for, while, for :, streams)</li>
+<li>Describe all methods of iteration over elements in a List (for, while, each)</li>
 <li>What is annotation? What is retention type? What retention types do you know?</li>
-<li>Stream API</li>
+<li>Example of varargs. What will be output for the code if you call foo() method?<br>
+private void test(int i) {<br>
+System.out.println("int");<br>
+}<br>
+private void test(Integer i) {<br>
+System.out.println("Integer");<br>
+}<br>
+private void test(Object o) {<br>
+System.out.println("Object");<br>
+}<br>
+private void test(Object ...  o) {<br>
+System.out.println("Object vargs");<br>
+}<br>
+private void foo() {<br>
+Object o = 1;<br>
+test(o);<br>
+test(1);<br>
+}<br>
+</li>
+<li>What is static import?</li>
+<li>What is Covariant Return Type?</li>
+</ol>
+
+<h2>
+<a id="java-8" class="anchor" href="#java-8" aria-hidden="true"><span class="octicon octicon-link"></span></a>Java 8</h2>
+
+<ol>
+<li>Stream API (how to create stream? Intermediate (stateless and statefull) and Terminal operations</li>
+<li>May stream be reused?</li>
+<li>May lambda expression contains state?</li>
 <li>Default methods in interfaces</li>
-<li>New Java 8 Date API</li>
+<li>Adavntages of new Java 8 Date API</li>
+<li>What is functional interface? How it can be used in practice?</li>
+<li>Write down example of method reference</li>
+<li>What is Optional and where it can be used?</li>
+<li>Iterator vs Spliterator</li>
 </ol>
 
 <h2>
@@ -137,7 +235,7 @@
     <div id="footer_wrap" class="outer">
       <footer class="inner">
         <p class="copyright">Awesome-java-questions maintained by <a href="https://github.com/ychulovskyy">ychulovskyy</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
 
